@@ -155,7 +155,7 @@ var legend = L.control({position: "bottomright"});
 
 legend.onAdd = function () {
    var div = L.DomUtil.create("div", "legend");
-   var labels = ["0-50k","50k-100k","100k-150k","150k-200k","200k+"];
+   var labels = ["200k+","150k-200k","100k-150k","50k-100k","0-50k"];
    var colors=["lightgreen","green","yellow","orange","red"]
 
    for (var i = 0; i < colors.length; i++) {
