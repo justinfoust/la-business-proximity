@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="https://bootadmin.net/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://bootadmin.net/css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="https://bootadmin.net/css/datatables.min.css">
+        <link rel="stylesheet" href="https://bootadmin.net/css/fullcalendar.min.css">
+        <link rel="stylesheet" href="https://bootadmin.net/css/bootadmin.min.css">
+
+        <title>Los Angeles Business Proximity</title>
+
+        <!-- Leaflet CSS & JS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+              integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+              crossorigin="" />
+
+        <!-- Make sure you put this AFTER Leaflet's CSS -->
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+                integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+                crossorigin=""></script>
+
+       
+        <!-- D3 -->
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+       
+               <!-- Icons -->
+        <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+        <link rel="stylesheet" href="static/css/leaflet.extra-markers.min.css">
+       
+        <!-- Marker Cluster JS & CSS -->
+
+
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
+        <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
+
+        <!-- Our CSS -->
+        <link rel="stylesheet" type="text/css" href="style.css">
+
+    </head>
+
+    <h2 id="home"class="mb-4">Business Types by Proximity to the Top 10 Businesses by Location in Los Angeles</h2>
+
+        <div class="row mb-4">
+            <div class="col-md">
+                <div class="d-flex border justify-content-around bg-info">
+                    <div class="bg-primary text-light p-4">
+                        <div class="d-flex align-items-center h-100">
+                            <i class="fa fa-3x fa-fw fa-cog"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1 bg-white p-4">
+                        <h4 class="text-uppercase text-secondary mb-0">Business Name</h4>
+                        
+                        <p class="font-weight-bold mb-0" id="meta-name"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="d-flex border justify-content-around bg-info">
+                    <div class="bg-success text-light p-4">
+                        <div class="d-flex align-items-center h-100">
+                            <i class="fa fa-3x fa-fw fa-comments"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1 bg-white p-4">
+                        <h4 class="text-uppercase text-secondary mb-0">Number of Locations</h4>
+                    
+                        <p class="font-weight-bold mb-0" id="meta-loc"></p>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-md">
+                <div class="d-flex border justify-content-around bg-info">
+                    <div class="bg-danger text-light p-4">
+                        <div class="d-flex align-items-center h-100">
+                            <i class="fa fa-3x fa-fw fa-shopping-cart"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1 bg-white p-4">
+                        <h4 class="text-uppercase text-secondary mb-0">Highest Frequency</h4>
+                        <hr>
+                        <small class="font-weight-bold mb-0" id="meta-top"></small>
+                    </div>
+                </div>
+            </div> -->
+            <div class="col-md">
+                <div class="d-flex border justify-content-around bg-info">
+                    <div class="bg-danger text-light p-4">
+                        <div class="d-flex align-items-center h-100">
+                            <i class="fa fa-3x fa-fw fa-users"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1 bg-white p-4">
+                        <h4 class="text-uppercase text-secondary mb-0">City Appearance</h4>
+                        
+                        <p class="font-weight-bold mb-0" id="meta-city"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-white font-weight-bold">
+                        <div class="col-md-4">
+                            <div class="well">
+                                <p>Pick a Business: </p>
+                                <select id="top10-select">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="hist-d3" style="width: 100%; height: 475px;"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-white font-weight-bold">
+                        Location Coverage
+                    </div>
+                    <div class="card-body">
+                        <div id="map" style="width: 100%; height: 475px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        </div>
+    </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://bootadmin.net/js/jquery.min.js"></script>
+<script src="https://bootadmin.net/js/bootstrap.bundle.min.js"></script>
+<script src="https://bootadmin.net/js/datatables.min.js"></script>
+<script src="https://bootadmin.net/js/moment.min.js"></script>
+<script src="https://bootadmin.net/js/fullcalendar.min.js"></script>
+<script src="https://bootadmin.net/js/bootadmin.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+</script>
+<!-- API key -->
+<script type="text/javascript" src="config.js"></script>
+<!-- JS -->
+<script type="text/javascript" src="project.js"></script>
+
+</body>
+
+</html>

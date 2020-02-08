@@ -1,0 +1,99 @@
+:root {
+  --color-scheme-contrast: #1d1145;
+  --color-scheme-highlight: #0db4b9;
+  --color-scheme-detail1: #f2a1a1;
+  --color-scheme-detail2: #e76d89;
+  --color-scheme-background1: #dfe9f5;
+  --color-scheme-background2: #faf4ed;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: impact;
+}
+
+#map,
+body,
+html {
+  height: 100%;
+}
+
+.legend {
+  padding: 10px;
+  font-family: Sanchez, serif;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 18px;
+  color: #555;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin: 0 8px 0 0;
+  opacity: 0.7;
+}
+
+#hist-plotly text {
+  text-anchor: start;
+}
+
+.left-axis {
+  text-anchor: start;
+  stroke: red;
+}
+
+text[data-attr="labels"] {
+  fill: var(--color-scheme-contrast);
+  stroke: black;
+  stroke-width: 0px;
+}
+
+#hist-d3 {
+  background-color:white;
+}
+
+.bar {
+  fill: var(--color-scheme-detail1);
+  stroke: black;
+}
+
+.axis {
+  font-family: impact;
+}
+
+.axis-label {
+  font-size: 14px;
+}
+
+.title-label {
+  font-size: 24px;
+  fill: var(--color-scheme-contrast);
+}
+
+.dropdown-option {
+  text-transform: capitalize;
+}
+
+legend {
+  line-height: 24px;
+  color: #555;
+}
+
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 12px;
+  opacity: 0.8;
+}
+
+#home{
+  margin-top: 50px;
+  text-align: center;
+}
